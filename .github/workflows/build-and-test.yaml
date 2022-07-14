@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [16]
+        node: [18]
         redis: [6]
 
     steps:
