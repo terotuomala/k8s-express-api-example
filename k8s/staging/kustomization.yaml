@@ -12,12 +12,6 @@ patchesJson6902:
     kind: HorizontalPodAutoscaler
     name: api
     version: v2beta1
-- path: pdb-patch.yaml
-  target:
-    group: policy
-    kind: PodDisruptionBudget
-    name: api
-    version: v1beta1
 
 configMapGenerator:
 - literals:
