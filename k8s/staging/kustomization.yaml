@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: api
+resources:
+- namespace.yaml
+- ../base/
+
+patchesJson6902:
+- path: hpa-patch.yaml
+  target:
+    group: autoscaling
+    kind: HorizontalPodAutoscaler
+    name: api
+    version: v2beta1
+- path: pdb-patch.yaml
+  target:
+    group: policy
+    kind: PodDisruptionBudget
+    name: api
+    version: v1beta1
+
+configMapGenerator:
+- literals:
+  - NODE_ENV=production
+  - GITHUB_API_URL=https://api.github.com/search/repositories
+  - REDIS_URL=redis-master.redis.svc.cluster.local
+  - REDIS_PORT=6379
+  - REDIS_DEFAULT_EXPIRATION=60
+  - LOG_LEVEL=warn
+  name: api-configuration
+
+images:
+- name: IMAGE_NAME
+  newName: ghcr.io/terotuomala/api
+  newTag: b90bf81795b93913db0fdc5804530d86fa826572

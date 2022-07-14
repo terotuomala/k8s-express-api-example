@@ -1,0 +1,15 @@
+dist
+node_modules
+k8s
+LICENSE
+flowchart.svg
+skaffold.yaml
+.git
+.gitignore
+.github
+.env
+.eslintrc.js
+.pre-commit-config.yaml
+.npm
+.config
+*.md

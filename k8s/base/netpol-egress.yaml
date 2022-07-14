@@ -1,0 +1,130 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-kube-dns-redis-github
+  namespace: api
+spec:
+  podSelector:
+    matchLabels:
+      app: api
+  egress:
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - port: 53
+          protocol: UDP
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              name: redis
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: redis
+      ports:
+        - port: 6379
+
+    # api.github.com IP addresses (https://api.github.com/meta)
+    - to:
+        - ipBlock:
+            cidr: 192.30.252.0/22
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 185.199.108.0/22
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 140.82.112.0/20
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.230.158.120/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 18.179.245.253/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 52.69.239.207/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.209.163.61/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 54.180.75.25/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.233.76.15/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.234.168.60/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.250.168.23/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.250.94.254/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 54.169.195.247/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.236.14.80/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 13.238.54.232/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 52.63.231.178/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 18.229.199.252/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 54.207.47.76/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 20.201.28.148/32
+      ports:
+        - port: 443
+    - to:
+        - ipBlock:
+            cidr: 20.205.243.168/32
+      ports:
+        - port: 443
