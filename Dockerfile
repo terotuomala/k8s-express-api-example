@@ -1,4 +1,4 @@
-FROM node:18-slim@sha256:889e696f80a9fc8a78f01260339e9a91de6fd81d70df4a35d84bf97d3869508f as build
+FROM node:18-slim@sha256:6d22507fd23261d481b80acb478c2a152d01053d2b2cdea50bec24bb44b64fdb as build
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN npm ci --production
 COPY . .
 
 
-FROM node:18-slim@sha256:889e696f80a9fc8a78f01260339e9a91de6fd81d70df4a35d84bf97d3869508f as release
+FROM node:18-slim@sha256:6d22507fd23261d481b80acb478c2a152d01053d2b2cdea50bec24bb44b64fdb as release
 
 # Switch to non-root user uid=1000(node)
 USER node
