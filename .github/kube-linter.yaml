@@ -7,3 +7,4 @@ checks:
     - "required-annotation-email"
     - "required-label-owner"
     - "hpa-minimum-three-replicas"
+    - "pdb-min-available"
