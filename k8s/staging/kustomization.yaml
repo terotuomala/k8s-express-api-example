@@ -26,4 +26,4 @@ configMapGenerator:
 images:
 - name: IMAGE_NAME
   newName: ghcr.io/terotuomala/api
-  newTag: 428a783e6368396d41b531241530f05c052814f2
+  newTag: 9e68fb0ce8ed12e630c60eccac2055e04946f371
