@@ -23,7 +23,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy app directory from build stage
-COPY --link --chown=node:node --from=build /app .
+COPY --link --chown=65532 --from=build /app .
 
 EXPOSE 3001
 
