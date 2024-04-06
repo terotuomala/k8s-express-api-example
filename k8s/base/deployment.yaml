@@ -45,7 +45,7 @@ spec:
         image: IMAGE_NAME
         imagePullPolicy: IfNotPresent
         securityContext:
-          runAsUser: 1000 # node
+          runAsUser: 65532 # node
           runAsNonRoot: true
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
