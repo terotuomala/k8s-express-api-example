@@ -67,7 +67,7 @@ const connectionStatus = async () => {
     return await client.status
 
   } catch (err) {
-    logger.error('Cannot check redis connection status')
+    logger.error('Cannot check redis connection status', err)
   }
 }
 

@@ -57,4 +57,6 @@ jobs:
       run: npm ci
 
     - name: Lint JS
+      env:
+        ESLINT_USE_FLAT_CONFIG: false
       run: npm run lint
