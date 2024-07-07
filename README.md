@@ -27,7 +27,15 @@ In a nutshell the application is used as a proxy for fetching most starred GitHu
 
 A simplified usage flow of the data fetching and Redis cache usage:
 
-![flowchart](./flowchart.svg)
+```mermaid
+flowchart LR;
+    A[User] --> G["/"];
+    G --> B{Check Redis};
+    B -->|Found| C[Return data];
+    B -->|Not found| D[Fetch from GitHub API];
+    D --> E[Save to Redis];
+    E --> F[Return data];
+```
 
 <!-- ENDPOINTS -->
 ### Endpoints
@@ -85,7 +93,8 @@ To achieve this:
 Kustomize configuration is based on [Directory Structure Based Layout](https://kubectl.docs.kubernetes.io/pages/app_composition_and_deployment/structure_directories.html) in order to be able to use multiple environments with different configuration.
 
 ```sh
-├── base
+📁 k8s
+├── 📁 base
 │   ├── deployment.yaml
 │   ├── hpa.yaml
 │   ├── ingress.yaml
@@ -94,7 +103,7 @@ Kustomize configuration is based on [Directory Structure Based Layout](https://k
 │   ├── netpol-ingress.yaml
 │   ├── pdb.yaml
 │   └── service.yaml
-└── staging
+└── 📁 staging
     ├── hpa-patch.yaml
     ├── kustomization.yaml
     ├── namespace.yaml
@@ -105,7 +114,7 @@ Kustomize configuration is based on [Directory Structure Based Layout](https://k
 ## :keyboard: Local development
 Start the redis container:
 ```sh
-docker run -d --rm --name redis -p 6379:6379 redis:6-alpine
+docker run -d --rm --name redis -p 6379:6379 redis:7-alpine
 ```
 
 Start the nodemon tool which automatically restarts the node application when file changes in the directory are detected:
