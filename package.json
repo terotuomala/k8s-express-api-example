@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "9.31.0",
-    "jest": "30.0.4",
+    "jest": "30.0.5",
     "pino-pretty": "13.0.0",
     "nodemon": "3.1.10",
     "supertest": "7.1.3"
