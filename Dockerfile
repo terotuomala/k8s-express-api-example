@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM chainguard/node@sha256:5bd243150066e7a574d9f26e4863fe5e6902b55a397ed829b3aafee2a021c5fa as build
+FROM chainguard/node@sha256:65f801775274b2f3b90fce6a03dcf8a2e1d74f304b026ba3d5215c858e0c78e6 as build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN npm ci --production
 COPY . .
 
 
-FROM chainguard/node@sha256:5bd243150066e7a574d9f26e4863fe5e6902b55a397ed829b3aafee2a021c5fa as release
+FROM chainguard/node@sha256:65f801775274b2f3b90fce6a03dcf8a2e1d74f304b026ba3d5215c858e0c78e6 as release
 
 # Switch to non-root user uid=65532(node)
 USER node
