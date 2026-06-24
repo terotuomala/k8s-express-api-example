@@ -1,0 +1,34 @@
+{{- if .Values.networkPolicy.egress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "k8s-express-api.fullname" . }}-egress
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "k8s-express-api.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "k8s-express-api.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Egress
+  egress:
+    # Redis egress (ioredis on port 6379)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: redis
+      ports:
+        - protocol: TCP
+          port: 6379
+    # GitHub API egress (axios on port 443)
+    - ports:
+        - protocol: TCP
+          port: 443
+    # DNS resolution
+    - ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+{{- end }}

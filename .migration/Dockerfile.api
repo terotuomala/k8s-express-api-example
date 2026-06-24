@@ -1,0 +1,32 @@
+# Dockerfile.api — terotuomala/k8s-express-api-example
+# Multi-stage production build for Node.js/Express API
+# Target: GKE atlas-prod namespace
+# Source: https://github.com/terotuomala/k8s-express-api-example
+# run_id: run-20260620-032937
+
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production && npm cache clean --force
+
+FROM node:20-alpine AS runtime
+WORKDIR /app
+
+# Non-root user for security hardening (ST-006 network security story)
+RUN addgroup -g 1001 nodeapp && adduser -D -u 1001 -G nodeapp nodeapp
+
+# Copy production deps and source
+COPY --from=deps /app/node_modules ./node_modules
+COPY src/ ./src/
+COPY package.json ./
+
+RUN chown -R nodeapp:nodeapp /app
+USER nodeapp
+
+EXPOSE 3001
+
+# Health probes match k8s/base/deployment.yaml readinessProbe and livenessProbe paths
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD wget -qO- http://localhost:3001/readyz || exit 1
+
+CMD ["node", "src/index.js"]
