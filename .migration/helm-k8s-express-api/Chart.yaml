@@ -1,0 +1,15 @@
+apiVersion: v2
+name: k8s-express-api
+description: Node.js/Express API with Redis cache and GitHub API integration — terotuomala/k8s-express-api-example
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - nodejs
+  - express
+  - redis
+  - kubernetes
+  - kustomize
+maintainers:
+  - name: migration-harness
+    email: sanjoy.ghosh@apexon.com
