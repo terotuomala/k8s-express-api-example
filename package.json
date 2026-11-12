@@ -33,6 +33,6 @@
     "jest": "30.5.2",
     "pino-pretty": "13.2.0",
     "nodemon": "3.1.14",
-    "supertest": "7.3.1"
+    "supertest": "7.3.2"
   }
 }
